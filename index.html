@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teoría Analítica de Números | Solucionario</title>
+
+    <!-- Estilo profesional académico (LaTeX.css): Hace que la web parezca un PDF científico -->
+    <link rel="stylesheet" href="https://latex.now.sh/style.css">
+
+    <!-- Motor Matemático (KaTeX): Renderiza el código LaTeX de las fórmulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body id="top">
+
+    <header>
+        <h1>Solucionario: Introducción a la Teoría Analítica de los Números</h1>
+        <p class="author">Autor: Gust <br> Basado en la obra de Tom M. Apostol</p>
+    </header>
+
+    <div class="abstract">
+        <h2>Resumen</h2>
+        <p>Este sitio web está dedicado a la divulgación matemática. Aquí publicaré las soluciones detalladas de los ejercicios propuestos en el clásico texto de Tom M. Apostol. El objetivo es proporcionar no solo el desarrollo formal, sino también la intuición heurística detrás de cada demostración.</p>
+    </div>
+
+    <main>
+        <section>
+            <h2>Capítulo 1: Conceptos Fundamentales</h2>
+            <p>Antes de sumergirnos en funciones aritméticas complejas, revisaremos conceptos básicos. Observa la calidad del renderizado matemático:</p>
+
+            <h3>Ejercicio de Prueba</h3>
+            <p><strong>Definición:</strong> La función zeta de Riemann, denotada por $\zeta(s)$, es una función de variable compleja $s = \sigma + it$ que, para $\sigma > 1$, se define mediante la serie de Dirichlet:</p>
+            
+            <p>$$ \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \text{ primo}} \left( 1 - \frac{1}{p^s} \right)^{-1} $$</p>
+
+            <p><strong>Análisis:</strong> La igualdad de la derecha representa el producto de Euler, estableciendo la conexión fundamental entre la función zeta y los números primos, pilar central de la obra de Apostol. $\blacksquare$</p>
+        </section>
+    </main>
+
+    <hr>
+    <footer>
+        <p>Sitio de divulgación creado por Gust | 2026</p>
+    </footer>
+
+</body>
+</html>
