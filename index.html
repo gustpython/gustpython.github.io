@@ -14,7 +14,7 @@
         body { 
             font-family: 'Georgia', serif; 
             line-height: 1.6; 
-            max-width: 900px; 
+            max-width: 1000px; /* Un poco más ancho para la fórmula */
             margin: 40px auto; 
             padding: 0 20px; 
             color: #2c3e50; 
@@ -23,13 +23,35 @@
         h1 { color: #2c3e50; border-bottom: 2px solid #34495e; padding-bottom: 10px; font-size: 2.2em; }
         h2 { color: #7f8c8d; font-size: 1.2em; font-weight: normal; margin-top: -10px; }
         
-        .portada { 
-            width: 100%; 
-            max-width: 700px; 
-            margin: 20px auto; 
-            display: block; 
-            border: 1px solid #ecf0f1; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        /* ESTILOS PARA EL PANEL DE LA FÓRMULA (Reemplaza a la imagen) */
+        .panel-formula {
+            background-color: #ffffff;
+            border: 1px solid #dcdde1;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid #2980b9;
+        }
+        .formula-principal {
+            text-align: center;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #bdc3c7;
+        }
+        .formula-definiciones {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 0.95em;
+        }
+        .def-item {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            margin: 10px;
         }
         
         .autor-info {
@@ -41,7 +63,6 @@
             font-size: 0.95em;
         }
 
-        /* Estilos específicos para el área de contacto */
         .contacto-seccion {
             margin-top: 15px;
             padding-top: 15px;
@@ -59,9 +80,7 @@
             transition: background-color 0.3s ease;
             font-size: 1.05em;
         }
-        .contacto-btn:hover {
-            background-color: #1c5980;
-        }
+        .contacto-btn:hover { background-color: #1c5980; }
 
         .capitulos { list-style: none; padding: 0; }
         .capitulos li { 
@@ -95,7 +114,26 @@
         <h1>Solucionario: Introducción a la Teoría Analítica de Números (Tom M. Apostol)</h1>
         <h2>Autor: Msc. Oscar Gustavo Carranza Tejada</h2>
         
-        <img src="magica_formula.png" alt="Fórmula explícita de números primos por el Msc. Oscar Carranza" class="portada">
+        <div class="panel-formula">
+            <div style="text-align: left; font-family: Arial, sans-serif; color: #7f8c8d; font-size: 0.9em; margin-bottom: 10px;">
+                <strong>Representación analítica de la brecha entre números primos sucesivos:</strong> (Con $p_1 = 2, p_2 = 3$)
+            </div>
+            
+            <div class="formula-principal">
+                $$ p_{n+1} - p_n = \frac{M}{2} - \max_{(t_1, \dots, t_n) \in D} \sum_{k=1}^{\frac{M}{2}-1} \cot\left(\frac{\pi k}{M}\right) \operatorname{sen}\left(\frac{2\pi k \cdot T(t_1, \dots, t_n)}{M}\right) $$
+                <div style="text-align: right; font-size: 0.9em; color: #555; margin-top: 5px;">$$ \forall n \in \mathbb{N} \cap [2, +\infty[ $$</div>
+            </div>
+            
+            <div style="text-align: left; font-family: Arial, sans-serif; color: #7f8c8d; font-size: 0.9em; margin-bottom: 5px;">
+                <em>En donde:</em>
+            </div>
+            
+            <div class="formula-definiciones">
+                <div class="def-item">$$ M = \prod_{i=1}^n p_i $$</div>
+                <div class="def-item">$$ D = \mathbb{Z}^n \cap \mathop{\times}_{i=1}^n [1, p_i - 1] $$</div>
+                <div class="def-item">$$ T(t_1, \dots, t_n) = -p_n + \sum_{j=1}^n t_j \left(\frac{M}{p_j}\right)^{p_j - 1} $$</div>
+            </div>
+        </div>
     </header>
 
     <div class="autor-info">
