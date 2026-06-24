@@ -12,8 +12,8 @@
             delimiters: [
                 {left: '$$', right: '$$', display: true},
                 {left: '\\[', right: '\\]', display: true},
-                {left: '$', right: '$', display: false},
-                {left: '\\(', right: '\\)', display: false}
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
             ]
         });"></script>
 
@@ -21,7 +21,7 @@
         body { 
             font-family: 'Georgia', serif; 
             line-height: 1.6; 
-            max-width: 1000px; 
+            max-width: 900px; 
             margin: 40px auto; 
             padding: 0 20px; 
             color: #2c3e50; 
@@ -30,22 +30,28 @@
         h1 { color: #2c3e50; border-bottom: 2px solid #34495e; padding-bottom: 10px; font-size: 2.2em; }
         h2 { color: #7f8c8d; font-size: 1.2em; font-weight: normal; margin-top: -10px; }
         
-        /* ESTILOS DEL PANEL COMPACTO */
+        /* ESTILOS DEL PANEL SÚPER COMPACTO */
         .panel-formula {
             background-color: #ffffff;
             border: 1px solid #dcdde1;
             border-radius: 8px;
-            padding: 15px 20px; /* Padding reducido */
-            margin: 20px auto; /* Margen reducido */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-left: 5px solid #2980b9;
-            font-size: 0.85em; /* Reduce el tamaño general de la fórmula */
+            padding: 10px 15px; /* Relleno drásticamente reducido */
+            margin: 15px auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid #2980b9;
+            font-size: 0.75em; /* Reducción agresiva del tamaño (75%) */
         }
+        
+        /* TRUCO CLAVE: Forzar a KaTeX a no usar márgenes verticales enormes */
+        .panel-formula .katex-display {
+            margin: 0.5em 0 !important; 
+        }
+
         .formula-principal {
             text-align: center;
             overflow-x: auto;
-            margin-bottom: 10px;
-            padding-bottom: 15px;
+            margin-bottom: 5px;
+            padding-bottom: 10px;
             border-bottom: 1px dashed #bdc3c7;
         }
         .formula-definiciones {
@@ -56,9 +62,9 @@
         }
         .def-item {
             flex: 1;
-            min-width: 200px;
+            min-width: 150px;
             text-align: center;
-            margin: 5px;
+            margin: 0;
         }
         
         .autor-info {
@@ -122,15 +128,15 @@
         <h2>Autor: Msc. Oscar Gustavo Carranza Tejada</h2>
         
         <div class="panel-formula">
-            <div style="text-align: left; font-family: Arial, sans-serif; color: #7f8c8d; margin-bottom: 10px;">
-                <strong>Representación analítica de la brecha entre números primos sucesivos:</strong> (Con $p_1 = 2, p_2 = 3$)
+            <div style="text-align: left; font-family: Arial, sans-serif; color: #7f8c8d; margin-bottom: 5px;">
+                <strong>Representación analítica de la brecha entre números primos sucesivos:</strong> (Con \(p_1 = 2, p_2 = 3\))
             </div>
             
             <div class="formula-principal">
                 $$ p_{n+1} - p_n = \frac{M}{2} - \max_{(t_1, \dots, t_n) \in D} \sum_{k=1}^{\frac{M}{2}-1} \cot\left(\frac{\pi k}{M}\right) \operatorname{sen}\left(\frac{2\pi k \cdot T(t_1, \dots, t_n)}{M}\right), \quad \forall n \in \mathbb{N} \cap [2, +\infty[ $$
             </div>
             
-            <div style="text-align: left; font-family: Arial, sans-serif; color: #7f8c8d; margin-bottom: 5px;">
+            <div style="text-align: left; font-family: Arial, sans-serif; color: #7f8c8d; margin-bottom: 0;">
                 <em>En donde:</em>
             </div>
             
