@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2.2 - Teoría Analítica de Números</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+
+    <style>
+        body { font-family: 'Georgia', serif; line-height: 1.6; max-width: 900px; margin: 40px auto; padding: 0 20px; color: #2c3e50; }
+        header { border-bottom: 2px solid #34495e; padding-bottom: 20px; margin-bottom: 40px; }
+        .nav-link { color: #2980b9; text-decoration: none; font-family: 'Arial', sans-serif; font-size: 0.9em; font-weight: bold;}
+        .nav-link:hover { text-decoration: underline; }
+        
+        .problema-box { background-color: #f8f9fa; border-left: 4px solid #2980b9; padding: 15px 20px; margin-bottom: 20px; border-radius: 0 5px 5px 0; font-style: italic; }
+        .heuristica { font-family: 'Arial', sans-serif; background-color: #eaf2f8; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 0.95em; color: #154360; }
+        .demostracion { padding-left: 10px; }
+        .demostracion ol { margin-top: 10px; margin-bottom: 20px; }
+        .demostracion li { margin-bottom: 15px; }
+        .qedsymbol { text-align: right; font-weight: bold; margin-top: 10px; color: #2c3e50; }
+        
+        .seccion-comentarios { margin-top: 50px; border-top: 2px dashed #bdc3c7; padding-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="capitulo2.html" class="nav-link">← Volver a los Ejercicios del Capítulo 2</a>
+        <h1 style="color: #2c3e50; font-size: 2em; margin-bottom: 5px;">Ejercicio 2.2</h1>
+    </header>
+
+    <main>
+        <div class="problema-box">
+            <strong>Enunciado:</strong> Para cada una de las proposiciones que siguen, establecer una demostración o presentar un contraejemplo.<br>
+            (a) Si \((m, n) = 1\) entonces \((\varphi(m), \varphi(n)) = 1\).<br>
+            (b) Si \(n\) es compuesto, entonces \((n, \varphi(n)) > 1\).<br>
+            (c) Si los mismos primos dividen a \(m\) y a \(n\), entonces \(n\varphi(m) = m\varphi(n)\).
+        </div>
+
+        <div class="heuristica">
+            <strong>Heurística y Plan de Ataque:</strong> En Teoría de Números, antes de intentar una demostración general para propiedades de divisibilidad cruzada, siempre es prudente buscar falsar la proposición con números pequeños. Las proposiciones (a) y (b) huelen a falsas porque \(\varphi(k)\) tiende a ser par muy rápidamente (para todo \(k>2\)), lo que facilita que el MCD no sea 1. Para (c), la frase "los mismos primos dividen a \(m\) y \(n\)" es una invitación directa a usar la fórmula del producto de Euler, ya que esta solo depende de los primos base y no de sus exponentes.
+        </div>
+
+        <div class="demostracion">
+            <strong>Solución:</strong>
+            <ol type="a">
+                <li>
+                    <strong>Falso.</strong> Mostramos un contraejemplo. Sea \(m=3\) y \(n=4\). Evidentemente el máximo común divisor es \((3, 4) = 1\). Sin embargo, evaluando la función totiente:
+                    $$ \varphi(3) = 2 \quad \text{y} \quad \varphi(4) = 2 $$
+                    El máximo común divisor de sus imágenes es \((\varphi(3), \varphi(4)) = (2, 2) = 2 \neq 1\).
+                </li>
+                <li>
+                    <strong>Falso.</strong> Mostramos un contraejemplo. Tomemos un número compuesto impar formado por primos distintos cuyas diferencias al restarle 1 no compartan factores con el número original. Sea \(n=15\) (compuesto, pues \(15 = 3 \times 5\)). Evaluamos su función totiente:
+                    $$ \varphi(15) = \varphi(3)\varphi(5) = (2)(4) = 8 $$
+                    Verificamos el MCD entre el número y su totiente: \((15, 8) = 1\), lo cual contradice la proposición \((n, \varphi(n)) > 1\).
+                </li>
+                <li>
+                    <strong>Verdadero.</strong> Demostración: Sea \(P = \{p_1, p_2, \dots, p_k\}\) el conjunto exacto de divisores primos que componen tanto a \(m\) como a \(n\). Expresamos la función de Euler para ambos mediante su fórmula de producto:
+                    $$ \varphi(m) = m \prod_{p_i \in P} \left(1 - \frac{1}{p_i}\right) $$
+                    $$ \varphi(n) = n \prod_{p_i \in P} \left(1 - \frac{1}{p_i}\right) $$
+                    Dado que el producto sobre los factores primos es idéntico en ambas ecuaciones (porque los factores primos son los mismos), podemos despejar dicha productoria en ambas expresiones:
+                    $$ \frac{\varphi(m)}{m} = \prod_{p_i \in P} \left(1 - \frac{1}{p_i}\right) = \frac{\varphi(n)}{n} $$
+                    Igualando ambos extremos y multiplicando en cruz, obtenemos directamente:
+                    $$ n\varphi(m) = m\varphi(n) $$
+                </li>
+            </ol>
+            <div class="qedsymbol">\(\blacksquare\)</div>
+        </div>
+
+        <div class="seccion-comentarios">
+            <h4 style="color: #2c3e50; font-family: Arial, sans-serif;">Discusión y Revisión por Pares</h4>
+            <script src="https://giscus.app/client.js"
+                    data-repo="gustpython/gustpython.github.io"
+                    data-repo-id="R_kgDOTCcheA"
+                    data-category="General"
+                    data-category-id="DIC_kwDOTCcheM4C_19I"
+                    data-mapping="specific"
+                    data-term="Ejercicio 2.2"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="light"
+                    data-lang="es"
+                    data-loading="lazy"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </main>
+</body>
+</html>
