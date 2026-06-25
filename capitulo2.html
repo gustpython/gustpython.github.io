@@ -12,8 +12,8 @@
             delimiters: [
                 {left: '$$', right: '$$', display: true},
                 {left: '\\[', right: '\\]', display: true},
-                {left: '$', right: '$', display: false},
-                {left: '\\(', right: '\\)', display: false}
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
             ]
         });"></script>
 
@@ -60,9 +60,22 @@
             color: #2c3e50;
         }
         
-        /* Ajuste para listas dentro de demostraciones */
         .demostracion ol { margin-top: 10px; margin-bottom: 20px; }
         .demostracion li { margin-bottom: 15px; }
+
+        /* Estilos de la caja de comentarios */
+        .seccion-comentarios {
+            margin-top: 50px; 
+            border-top: 2px dashed #bdc3c7; 
+            padding-top: 20px;
+            background-color: #ffffff;
+        }
+        .titulo-comentarios {
+            color: #2c3e50; 
+            font-family: Arial, sans-serif; 
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
     </style>
 </head>
 <body>
@@ -78,47 +91,68 @@
             <h2 style="color: #2980b9;">Ejercicio 2.1</h2>
             
             <div class="problema-box">
-                <strong>Enunciado:</strong> Buscar todos los enteros $n$ tales que:<br>
-                (a) $\varphi(n) = n/2$<br>
-                (b) $\varphi(n) = \varphi(2n)$<br>
-                (c) $\varphi(n) = 12$
+                <strong>Enunciado:</strong> Buscar todos los enteros \(n\) tales que:<br>
+                (a) \(\varphi(n) = n/2\)<br>
+                (b) \(\varphi(n) = \varphi(2n)\)<br>
+                (c) \(\varphi(n) = 12\)
             </div>
 
             <div class="heuristica">
-                <strong>Heurística y Plan de Ataque:</strong> La clave para resolver igualdades con la función de Euler es recurrir a su representación como producto de Euler: $\varphi(n) = n \prod_{p|n} (1 - 1/p)$. Esto nos permite analizar las proporciones y restringir los posibles factores primos de $n$. Para el caso (c), recordamos que cada factor primo $p$ aporta un término $(p-1)$ que debe dividir a 12, lo que acota enormemente nuestra búsqueda.
+                <strong>Heurística y Plan de Ataque:</strong> La clave para resolver igualdades con la función de Euler es recurrir a su representación como producto de Euler: \(\varphi(n) = n \prod_{p|n} (1 - 1/p)\). Esto nos permite analizar las proporciones y restringir los posibles factores primos de \(n\). Para el caso (c), recordamos que cada factor primo \(p\) aporta un término \((p-1)\) que debe dividir a 12, lo que acota enormemente nuestra búsqueda.
             </div>
 
             <div class="demostracion">
                 <strong>Solución:</strong>
                 <ol type="a">
                     <li>
-                        Partimos de la fórmula del producto: $\varphi(n) = n \prod_{p|n} (1 - \frac{1}{p})$. Igualando a la hipótesis:
+                        Partimos de la fórmula del producto: \(\varphi(n) = n \prod_{p|n} (1 - \frac{1}{p})\). Igualando a la hipótesis:
                         $$ n \prod_{p|n} \left(1 - \frac{1}{p}\right) = \frac{n}{2} \implies \prod_{p|n} \left(\frac{p-1}{p}\right) = \frac{1}{2} $$
-                        Para que este producto de fracciones genere exactamente $1/2$, el único factor primo admisible es $p=2$, ya que cualquier otro primo impar introduciría factores adicionales en el numerador que no podrían cancelarse. Por lo tanto, $n$ solo puede tener potencias de 2. Así, $n = 2^k$ para todo $k \ge 1$.
+                        Para que este producto de fracciones genere exactamente 1/2, el único factor primo admisible es \(p=2\), ya que cualquier otro primo impar introduciría factores adicionales en el numerador que no podrían cancelarse. Por lo tanto, \(n\) solo puede tener potencias de 2. Así, \(n = 2^k\) para todo \(k \ge 1\).
                     </li>
                     <li>
-                        Evaluamos la paridad de $n$. Si $n$ es par, entonces $n = 2^k \cdot m$ donde $k \ge 1$ y $(2, m) = 1$. Entonces $2n = 2^{k+1}m$.
+                        Evaluamos la paridad de \(n\). Si \(n\) es par, entonces \(n = 2^k \cdot m\) donde \(k \ge 1\) y \((2, m) = 1\). Entonces \(2n = 2^{k+1}m\).
                         $$ \varphi(2n) = \varphi(2^{k+1})\varphi(m) = 2^k \varphi(m) $$
                         $$ \varphi(n) = \varphi(2^k)\varphi(m) = 2^{k-1} \varphi(m) $$
-                        Como $\varphi(m) \ge 1$, es imposible que $2^k = 2^{k-1}$. No hay soluciones pares.
+                        Como \(\varphi(m) \ge 1\), es imposible que \(2^k = 2^{k-1}\). No hay soluciones pares.
                         <br><br>
-                        Si $n$ es impar, entonces $(2, n) = 1$. Por la multiplicatividad de $\varphi$:
+                        Si \(n\) es impar, entonces \((2, n) = 1\). Por la multiplicatividad de \(\varphi\):
                         $$ \varphi(2n) = \varphi(2)\varphi(n) = (1)\varphi(n) = \varphi(n) $$
-                        Por lo tanto, la igualdad se cumple para <strong>todos los enteros $n$ impares</strong>.
+                        Por lo tanto, la igualdad se cumple para <strong>todos los enteros \(n\) impares</strong>.
                     </li>
                     <li>
-                        Sea $n = p_1^{a_1} p_2^{a_2} \dots p_k^{a_k}$. Sabemos que $\varphi(n) = p_1^{a_1-1}(p_1-1) \dots p_k^{a_k-1}(p_k-1) = 12$. 
-                        Esto implica que para cada divisor primo $p|n$, el término $(p-1)$ debe dividir a 12. 
-                        Los divisores de 12 son $\{1, 2, 3, 4, 6, 12\}$. Igualando $p-1$ a estos divisores, los posibles factores primos de $n$ son $p \in \{2, 3, 5, 7, 13\}$. Evaluando sistemáticamente las combinaciones válidas que multiplican 12:
+                        Sea \(n = p_1^{a_1} p_2^{a_2} \dots p_k^{a_k}\). Sabemos que \(\varphi(n) = p_1^{a_1-1}(p_1-1) \dots p_k^{a_k-1}(p_k-1) = 12\). 
+                        Esto implica que para cada divisor primo \(p|n\), el término \((p-1)\) debe dividir a 12. 
+                        Los divisores de 12 son \(\{1, 2, 3, 4, 6, 12\}\). Igualando \(p-1\) a estos divisores, los posibles factores primos de \(n\) son \(p \in \{2, 3, 5, 7, 13\}\). Evaluando sistemáticamente las combinaciones válidas que multiplican 12:
                         <ul>
-                            <li>Si $p=13$: $\varphi(13) = 12 \implies n \in \{13, 26\}$ (ya que $\varphi(26)=\varphi(2)\varphi(13)=12$).</li>
-                            <li>Si $p=7$: $\varphi(7) = 6$, necesitamos un factor que aporte $\varphi(m)=2$ con $(7,m)=1$. Esto ocurre si $m \in \{3, 4, 6\}$. Así, $n \in \{21, 28, 42\}$.</li>
-                            <li>Si solo se usan primos 2 y 3: Necesitamos $\varphi(2^a 3^b) = 2^{a-1}3^{b-1}(1)(2) = 12 = 2^2 \cdot 3$. Esto fuerza $a=2, b=2 \implies n = 36$.</li>
+                            <li>Si \(p=13\): \(\varphi(13) = 12 \implies n \in \{13, 26\}\) (ya que \(\varphi(26)=\varphi(2)\varphi(13)=12\)).</li>
+                            <li>Si \(p=7\): \(\varphi(7) = 6\), necesitamos un factor que aporte \(\varphi(m)=2\) con \((7,m)=1\). Esto ocurre si \(m \in \{3, 4, 6\}\). Así, \(n \in \{21, 28, 42\}\).</li>
+                            <li>Si solo se usan primos 2 y 3: Necesitamos \(\varphi(2^a 3^b) = 2^{a-1}3^{b-1}(1)(2) = 12 = 2^2 \cdot 3\). Esto fuerza \(a=2, b=2 \implies n = 36\).</li>
                         </ul>
-                        En conclusión, los enteros son: <strong>$n \in \{13, 21, 26, 28, 36, 42\}$</strong>.
+                        En conclusión, los enteros son: <strong>\(n \in \{13, 21, 26, 28, 36, 42\}\)</strong>.
                     </li>
                 </ol>
-                <div class="qedsymbol">$\blacksquare$</div>
+                <div class="qedsymbol">\(\blacksquare\)</div>
+            </div>
+
+            <div class="seccion-comentarios">
+                <h4 class="titulo-comentarios">Discusión y Revisión por Pares (Ejercicio 2.1)</h4>
+                <script src="https://giscus.app/client.js"
+                        data-repo="gustpython/gustpython.github.io"
+                        data-repo-id="R_kgDOTCcheA"
+                        data-category="General"
+                        data-category-id="DIC_kwDOTCcheM4C_19I"
+                        data-mapping="specific"
+                        data-term="Ejercicio 2.1"
+                        data-strict="0"
+                        data-reactions-enabled="1"
+                        data-emit-metadata="0"
+                        data-input-position="bottom"
+                        data-theme="light"
+                        data-lang="es"
+                        data-loading="lazy"
+                        crossorigin="anonymous"
+                        async>
+                </script>
             </div>
         </section>
 
@@ -129,30 +163,30 @@
             
             <div class="problema-box">
                 <strong>Enunciado:</strong> Para cada una de las proposiciones que siguen, establecer una demostración o presentar un contraejemplo.<br>
-                (a) Si $(m, n) = 1$ entonces $(\varphi(m), \varphi(n)) = 1$.<br>
-                (b) Si $n$ es compuesto, entonces $(n, \varphi(n)) > 1$.<br>
-                (c) Si los mismos primos dividen a $m$ y a $n$, entonces $n\varphi(m) = m\varphi(n)$.
+                (a) Si \((m, n) = 1\) entonces \((\varphi(m), \varphi(n)) = 1\).<br>
+                (b) Si \(n\) es compuesto, entonces \((n, \varphi(n)) > 1\).<br>
+                (c) Si los mismos primos dividen a \(m\) y a \(n\), entonces \(n\varphi(m) = m\varphi(n)\).
             </div>
 
             <div class="heuristica">
-                <strong>Heurística y Plan de Ataque:</strong> En Teoría de Números, antes de intentar una demostración general para propiedades de divisibilidad cruzada, siempre es prudente buscar falsar la proposición con números pequeños. Las proposiciones (a) y (b) huelen a falsas porque $\varphi(k)$ tiende a ser par muy rápidamente (para todo $k>2$), lo que facilita que el MCD no sea 1. Para (c), la frase "los mismos primos dividen a $m$ y $n$" es una invitación directa a usar la fórmula del producto de Euler, ya que esta solo depende de los primos base y no de sus exponentes.
+                <strong>Heurística y Plan de Ataque:</strong> En Teoría de Números, antes de intentar una demostración general para propiedades de divisibilidad cruzada, siempre es prudente buscar falsar la proposición con números pequeños. Las proposiciones (a) y (b) huelen a falsas porque \(\varphi(k)\) tiende a ser par muy rápidamente (para todo \(k>2\)), lo que facilita que el MCD no sea 1. Para (c), la frase "los mismos primos dividen a \(m\) y \(n\)" es una invitación directa a usar la fórmula del producto de Euler, ya que esta solo depende de los primos base y no de sus exponentes.
             </div>
 
             <div class="demostracion">
                 <strong>Solución:</strong>
                 <ol type="a">
                     <li>
-                        <strong>Falso.</strong> Mostramos un contraejemplo. Sea $m=3$ y $n=4$. Evidentemente el máximo común divisor es $(3, 4) = 1$. Sin embargo, evaluando la función totiente:
+                        <strong>Falso.</strong> Mostramos un contraejemplo. Sea \(m=3\) y \(n=4\). Evidentemente el máximo común divisor es \((3, 4) = 1\). Sin embargo, evaluando la función totiente:
                         $$ \varphi(3) = 2 \quad \text{y} \quad \varphi(4) = 2 $$
-                        El máximo común divisor de sus imágenes es $(\varphi(3), \varphi(4)) = (2, 2) = 2 \neq 1$.
+                        El máximo común divisor de sus imágenes es \((\varphi(3), \varphi(4)) = (2, 2) = 2 \neq 1\).
                     </li>
                     <li>
-                        <strong>Falso.</strong> Mostramos un contraejemplo. Tomemos un número compuesto impar formado por primos distintos cuyas diferencias al restarle 1 no compartan factores con el número original. Sea $n=15$ (compuesto, pues $15 = 3 \times 5$). Evaluamos su función totiente:
+                        <strong>Falso.</strong> Mostramos un contraejemplo. Tomemos un número compuesto impar formado por primos distintos cuyas diferencias al restarle 1 no compartan factores con el número original. Sea \(n=15\) (compuesto, pues \(15 = 3 \times 5\)). Evaluamos su función totiente:
                         $$ \varphi(15) = \varphi(3)\varphi(5) = (2)(4) = 8 $$
-                        Verificamos el MCD entre el número y su totiente: $(15, 8) = 1$, lo cual contradice la proposición $(n, \varphi(n)) > 1$.
+                        Verificamos el MCD entre el número y su totiente: \((15, 8) = 1\), lo cual contradice la proposición \((n, \varphi(n)) > 1\).
                     </li>
                     <li>
-                        <strong>Verdadero.</strong> Demostración: Sea $P = \{p_1, p_2, \dots, p_k\}$ el conjunto exacto de divisores primos que componen tanto a $m$ como a $n$. Expresamos la función de Euler para ambos mediante su fórmula de producto:
+                        <strong>Verdadero.</strong> Demostración: Sea \(P = \{p_1, p_2, \dots, p_k\}\) el conjunto exacto de divisores primos que componen tanto a \(m\) como a \(n\). Expresamos la función de Euler para ambos mediante su fórmula de producto:
                         $$ \varphi(m) = m \prod_{p_i \in P} \left(1 - \frac{1}{p_i}\right) $$
                         $$ \varphi(n) = n \prod_{p_i \in P} \left(1 - \frac{1}{p_i}\right) $$
                         Dado que el producto sobre los factores primos es idéntico en ambas ecuaciones (porque los factores primos son los mismos), podemos despejar dicha productoria en ambas expresiones:
@@ -161,7 +195,28 @@
                         $$ n\varphi(m) = m\varphi(n) $$
                     </li>
                 </ol>
-                <div class="qedsymbol">$\blacksquare$</div>
+                <div class="qedsymbol">\(\blacksquare\)</div>
+            </div>
+
+            <div class="seccion-comentarios">
+                <h4 class="titulo-comentarios">Discusión y Revisión por Pares (Ejercicio 2.2)</h4>
+                <script src="https://giscus.app/client.js"
+                        data-repo="gustpython/gustpython.github.io"
+                        data-repo-id="R_kgDOTCcheA"
+                        data-category="General"
+                        data-category-id="DIC_kwDOTCcheM4C_19I"
+                        data-mapping="specific"
+                        data-term="Ejercicio 2.2"
+                        data-strict="0"
+                        data-reactions-enabled="1"
+                        data-emit-metadata="0"
+                        data-input-position="bottom"
+                        data-theme="light"
+                        data-lang="es"
+                        data-loading="lazy"
+                        crossorigin="anonymous"
+                        async>
+                </script>
             </div>
         </section>
 
