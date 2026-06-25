@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2.1 - Teoría Analítica de Números</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+
+    <style>
+        body { font-family: 'Georgia', serif; line-height: 1.6; max-width: 900px; margin: 40px auto; padding: 0 20px; color: #2c3e50; }
+        header { border-bottom: 2px solid #34495e; padding-bottom: 20px; margin-bottom: 40px; }
+        .nav-link { color: #2980b9; text-decoration: none; font-family: 'Arial', sans-serif; font-size: 0.9em; font-weight: bold;}
+        .nav-link:hover { text-decoration: underline; }
+        
+        .problema-box { background-color: #f8f9fa; border-left: 4px solid #2980b9; padding: 15px 20px; margin-bottom: 20px; border-radius: 0 5px 5px 0; font-style: italic; }
+        .heuristica { font-family: 'Arial', sans-serif; background-color: #eaf2f8; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 0.95em; color: #154360; }
+        .demostracion { padding-left: 10px; }
+        .demostracion ol { margin-top: 10px; margin-bottom: 20px; }
+        .demostracion li { margin-bottom: 15px; }
+        .qedsymbol { text-align: right; font-weight: bold; margin-top: 10px; color: #2c3e50; }
+        
+        .seccion-comentarios { margin-top: 50px; border-top: 2px dashed #bdc3c7; padding-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="capitulo2.html" class="nav-link">← Volver a los Ejercicios del Capítulo 2</a>
+        <h1 style="color: #2c3e50; font-size: 2em; margin-bottom: 5px;">Ejercicio 2.1</h1>
+    </header>
+
+    <main>
+        <div class="problema-box">
+            <strong>Enunciado:</strong> Buscar todos los enteros \(n\) tales que:<br>
+            (a) \(\varphi(n) = n/2\)<br>
+            (b) \(\varphi(n) = \varphi(2n)\)<br>
+            (c) \(\varphi(n) = 12\)
+        </div>
+
+        <div class="heuristica">
+            <strong>Heurística y Plan de Ataque:</strong> La clave para resolver igualdades con la función de Euler es recurrir a su representación como producto de Euler: \(\varphi(n) = n \prod_{p|n} (1 - 1/p)\). Esto nos permite analizar las proporciones y restringir los posibles factores primos de \(n\). Para el caso (c), recordamos que cada factor primo \(p\) aporta un término \((p-1)\) que debe dividir a 12, lo que acota enormemente nuestra búsqueda.
+        </div>
+
+        <div class="demostracion">
+            <strong>Solución:</strong>
+            <ol type="a">
+                <li>
+                    Partimos de la fórmula del producto: \(\varphi(n) = n \prod_{p|n} (1 - \frac{1}{p})\). Igualando a la hipótesis:
+                    $$ n \prod_{p|n} \left(1 - \frac{1}{p}\right) = \frac{n}{2} \implies \prod_{p|n} \left(\frac{p-1}{p}\right) = \frac{1}{2} $$
+                    Para que este producto de fracciones genere exactamente 1/2, el único factor primo admisible es \(p=2\), ya que cualquier otro primo impar introduciría factores adicionales en el numerador que no podrían cancelarse. Por lo tanto, \(n\) solo puede tener potencias de 2. Así, \(n = 2^k\) para todo \(k \ge 1\).
+                </li>
+                <li>
+                    Evaluamos la paridad de \(n\). Si \(n\) es par, entonces \(n = 2^k \cdot m\) donde \(k \ge 1\) y \((2, m) = 1\). Entonces \(2n = 2^{k+1}m\).
+                    $$ \varphi(2n) = \varphi(2^{k+1})\varphi(m) = 2^k \varphi(m) $$
+                    $$ \varphi(n) = \varphi(2^k)\varphi(m) = 2^{k-1} \varphi(m) $$
+                    Como \(\varphi(m) \ge 1\), es imposible que \(2^k = 2^{k-1}\). No hay soluciones pares.
+                    <br><br>
+                    Si \(n\) es impar, entonces \((2, n) = 1\). Por la multiplicatividad de \(\varphi\):
+                    $$ \varphi(2n) = \varphi(2)\varphi(n) = (1)\varphi(n) = \varphi(n) $$
+                    Por lo tanto, la igualdad se cumple para <strong>todos los enteros \(n\) impares</strong>.
+                </li>
+                <li>
+                    Sea \(n = p_1^{a_1} p_2^{a_2} \dots p_k^{a_k}\). Sabemos que \(\varphi(n) = p_1^{a_1-1}(p_1-1) \dots p_k^{a_k-1}(p_k-1) = 12\). 
+                    Esto implica que para cada divisor primo \(p|n\), el término \((p-1)\) debe dividir a 12. 
+                    Los divisores de 12 son \(\{1, 2, 3, 4, 6, 12\}\). Igualando \(p-1\) a estos divisores, los posibles factores primos de \(n\) son \(p \in \{2, 3, 5, 7, 13\}\). Evaluando sistemáticamente las combinaciones válidas que multiplican 12:
+                    <ul>
+                        <li>Si \(p=13\): \(\varphi(13) = 12 \implies n \in \{13, 26\}\) (ya que \(\varphi(26)=\varphi(2)\varphi(13)=12\)).</li>
+                        <li>Si \(p=7\): \(\varphi(7) = 6\), necesitamos un factor que aporte \(\varphi(m)=2\) con \((7,m)=1\). Esto ocurre si \(m \in \{3, 4, 6\}\). Así, \(n \in \{21, 28, 42\}\).</li>
+                        <li>Si solo se usan primos 2 y 3: Necesitamos \(\varphi(2^a 3^b) = 2^{a-1}3^{b-1}(1)(2) = 12 = 2^2 \cdot 3\). Esto fuerza \(a=2, b=2 \implies n = 36\).</li>
+                    </ul>
+                    En conclusión, los enteros son: <strong>\(n \in \{13, 21, 26, 28, 36, 42\}\)</strong>.
+                </li>
+            </ol>
+            <div class="qedsymbol">\(\blacksquare\)</div>
+        </div>
+
+        <div class="seccion-comentarios">
+            <h4 style="color: #2c3e50; font-family: Arial, sans-serif;">Discusión y Revisión por Pares</h4>
+            <script src="https://giscus.app/client.js"
+                    data-repo="gustpython/gustpython.github.io"
+                    data-repo-id="R_kgDOTCcheA"
+                    data-category="General"
+                    data-category-id="DIC_kwDOTCcheM4C_19I"
+                    data-mapping="specific"
+                    data-term="Ejercicio 2.1"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="light"
+                    data-lang="es"
+                    data-loading="lazy"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </main>
+</body>
+</html>
